@@ -1,11 +1,20 @@
-import express from 'express'
+import express from 'express' //создание экземпляра express из внешнего express
+import 'dotenv/config'
+import { sequelize } from './db.js'
+
+//переменные сервера (приложение сервера app) + порт сервера
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const startServer = async () => {
+  try {
+    app.listen(port, () => console.log(`Сервер работает http://localhost:${port}`))
+    await sequelize.authenticate();//подключает сервер к БД через sequelize (db.js)
+    console.log('Connection has been established successfully.')
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+}
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+//Запуск сервера
+startServer()
