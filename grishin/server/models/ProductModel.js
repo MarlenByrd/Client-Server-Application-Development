@@ -1,7 +1,7 @@
 import { Sequelize } from '../db.js';
 import { DataTypes } from 'sequelize';
 
-export const Client = Sequelize.define('client', {
+export const Product = Sequelize.define('product', {
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -12,18 +12,13 @@ export const Client = Sequelize.define('client', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    email: {
+    description: {
         type: DataTypes.STRING,
-        allowNull: true,  
-        unique: true      
+        allowNull: true,     
     },
-    rating: {
+    price: {
         type: DataTypes.DECIMAL,
         allowNull: false,
-        defaultValue: 0   
-    },
-    bday: {
-        type: DataTypes.DATEONLY,
-        allowNull: true,  
+        defaultValue: 0      
     }
 });
