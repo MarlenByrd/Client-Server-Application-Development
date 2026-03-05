@@ -7,20 +7,15 @@ const Order = sequelize.define('Order', {
     primaryKey: true,
     autoIncrement: true
   },
-
   status: {
-    type: DataTypes.ENUM('open', 'close', 'canceled'),
+    type: DataTypes.ENUM('open', 'closed', 'canceled'),
     defaultValue: 'open'
   },
-
   date: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW
+    type: DataTypes.DATE
   },
-
   totalPrice: {
-    type: DataTypes.DECIMAL,
-    defaultValue: 0
+    type: DataTypes.DECIMAL
   }
 })
 

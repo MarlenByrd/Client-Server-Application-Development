@@ -1,4 +1,5 @@
-import { sequelize } from './models/index.js'
+import sequelize from '../db.js'
+
 import Cart from './cartModel.js'
 import Client from './clientModel.js'
 import Order from './orderModel.js'

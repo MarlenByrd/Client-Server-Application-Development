@@ -8,18 +8,18 @@ const Client = sequelize.define('Client', {
     autoIncrement: true
   },
   name: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING
   },
   email: {
     type: DataTypes.STRING,
-    unique: true,
+    unique: true
   },
   rating: {
-    type: DataTypes.DECIMAL,
+    type: DataTypes.INTEGER,
     defaultValue: 0
   },
-  bday: {
-    type: DataTypes.DATEONLY
+  birthday: {
+    type: DataTypes.DATE
   }
 })
 

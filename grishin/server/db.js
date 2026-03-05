@@ -1,4 +1,7 @@
 import { Sequelize } from 'sequelize'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -7,11 +10,8 @@ const sequelize = new Sequelize(
   {
     dialect: 'postgres',
     host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    dialectOptions: {
-      charset: 'utf8'
-    }
-  } 
+    port: process.env.DB_PORT
+  }
 )
 
-export default sequelize  // Измените эту строку!
+export default sequelize
