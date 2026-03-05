@@ -1,20 +1,37 @@
-import express from 'express' //создание экземпляра express из внешнего express
-import 'dotenv/config'
-import { sequelize } from './db.js'
+import express from 'express'
+import dotenv from 'dotenv'
+import { sequelize } from './models/index.js'
+import cors from 'cors'
 
-//переменные сервера (приложение сервера app) + порт сервера
+dotenv.config()
+
 const app = express()
-const port = process.env.PORT
 
-const startServer = async () => {
-  try {
-    app.listen(port, () => console.log(`Сервер работает http://localhost:${port}`))
-    await sequelize.authenticate();//подключает сервер к БД через sequelize (db.js)
-    console.log('Connection has been established successfully.')
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
+app.use(cors())
+app.use(express.json())
+
+const port = process.env.PORT || 3000
+
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
+
+const start = async () => {
+    try {
+        await sequelize.authenticate()
+        console.log('Подключение к БД успешно')
+
+        await sequelize.sync({ alter: true })
+        console.log('Синхронизация моделей успешна')
+
+        app.listen(port, () => {
+            console.log(`Server running on port ${port}`)
+        })
+
+    } catch (error) {
+        console.error("Ошибка:", error)
+        process.exit(1)
+    }
 }
 
-//Запуск сервера
-startServer()
+start()

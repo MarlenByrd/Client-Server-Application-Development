@@ -1,26 +1,27 @@
-import { Sequelize } from '../db.js';
-import { DataTypes } from 'sequelize';
+import sequelize from '../db.js'
+import { DataTypes } from 'sequelize'
 
-export const Order = Sequelize.define('order', {
-    id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    status: {
-        type: DataTypes.ENUM('open', 'closed', 'pending', 'cancelled'), 
-        allowNull: false,
-        defaultValue: 'open' 
-    },
-    date: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW 
-    },
-    totalPrice: {
-        type: DataTypes.DECIMAL,
-        allowNull: false,
-        defaultValue: 0      
-    },
-});
+const Order = sequelize.define('Order', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+
+  status: {
+    type: DataTypes.ENUM('open', 'close', 'canceled'),
+    defaultValue: 'open'
+  },
+
+  date: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW
+  },
+
+  totalPrice: {
+    type: DataTypes.DECIMAL,
+    defaultValue: 0
+  }
+})
+
+export default Order
