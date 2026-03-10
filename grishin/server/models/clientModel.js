@@ -18,9 +18,11 @@ const Client = sequelize.define('Client', {
     type: DataTypes.INTEGER,
     defaultValue: 0
   },
-  birthday: {
+  bday: {
     type: DataTypes.DATE
   }
+}, {
+  timestamps: false
 })
 
 export default Client

@@ -1,7 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { sequelize } from './models/index.js'
+import { Client, sequelize } from './models/index.js'
+
 
 dotenv.config()
 
@@ -12,8 +13,14 @@ app.use(express.json())
 
 const port = process.env.PORT || 3000
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+app.get('/clients/', async (req, res) => {
+  try {
+    const getAllClients = await Client.findAll()
+    res.status(200).json(getAllClients)
+  } 
+  catch (error) {
+    console.error("Ошибка при получении данных:", error)
+  }
 })
 
 const start = async () => {
