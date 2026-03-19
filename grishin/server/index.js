@@ -3,6 +3,8 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import { Client, sequelize } from './models/index.js'
 
+import router from './routes/index.js'
+import errorHandler from './middleware/errorHandler.js'
 
 dotenv.config()
 
@@ -39,4 +41,7 @@ const start = async () => {
   }
 }
 
+
+app.use('/api', router)
+app.use(errorHandler)
 start()
