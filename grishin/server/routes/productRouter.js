@@ -1,9 +1,20 @@
-import { Router } from 'express'
-import { getAllProducts, createProduct } from '../controllers/productController.js'
+import Router from "express"
+import {
+  getAllProducts,
+  getOneProduct,
+  createProduct,
+  updateProduct,
+  updateProductStatus,
+  deleteProduct
+} from "../controllers/productController.js"
 
 const router = new Router()
 
-router.get('/', getAllProducts)
-router.post('/', createProduct)
+router.post("/", createProduct)
+router.get("/", getAllProducts)
+router.get("/:id", getOneProduct)
+router.put("/:id", updateProduct)
+router.patch("/:id", updateProductStatus)
+router.delete("/:id", deleteProduct)
 
 export default router

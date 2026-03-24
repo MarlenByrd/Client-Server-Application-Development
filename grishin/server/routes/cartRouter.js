@@ -1,10 +1,20 @@
-import { Сart } from '../models/cartModel.js'
-import { Router } from "express"
-import { getAllCarts, createCart } from "../controlers/cartController.js"
+import Router from "express"
+import {
+  getAllCarts,
+  getOneCart,
+  createCart,
+  updateCart,
+  updateCartStatus,
+  deleteCart
+} from "../controllers/cartController.js"
 
-const router = Router();
+const router = new Router()
 
-router.get('', getAllCarts)
-router.post('', createCart)
+router.post("/", createCart)
+router.get("/", getAllCarts)
+router.get("/:id", getOneCart)
+router.put("/:id", updateCart)
+router.patch("/:id", updateCartStatus)
+router.delete("/:id", deleteCart)
 
-export default Router
+export default router

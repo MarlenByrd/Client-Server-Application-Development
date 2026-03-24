@@ -1,8 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { Client, sequelize } from './models/index.js'
 
+import { sequelize } from './models/index.js'
 import router from './routes/index.js'
 import errorHandler from './middleware/errorHandler.js'
 
@@ -15,15 +15,8 @@ app.use(express.json())
 
 const port = process.env.PORT || 3000
 
-app.get('/clients/', async (req, res) => {
-  try {
-    const getAllClients = await Client.findAll()
-    res.status(200).json(getAllClients)
-  } 
-  catch (error) {
-    console.error("Ошибка при получении данных:", error)
-  }
-})
+app.use('/api', router)
+app.use(errorHandler)
 
 const start = async () => {
   try {
@@ -41,7 +34,4 @@ const start = async () => {
   }
 }
 
-
-app.use('/api', router)
-app.use(errorHandler)
 start()
